@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nugget's Playlist</title>
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>🌙 Nugget's Playlist</h1>
+        <p class="tagline">A mini music app that is about to get a memory.</p>
+      </header>
+
+      <p id="status" role="status"></p>
+      <ul id="song-list"></ul>
+
+      <details class="add" open>
+        <summary>Add a song</summary>
+        <form id="add-form">
+          <input name="title" placeholder="Title" required />
+          <input name="artist" placeholder="Artist" required />
+          <input name="album" placeholder="Album (optional)" />
+          <button type="submit">Add</button>
+        </form>
+      </details>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

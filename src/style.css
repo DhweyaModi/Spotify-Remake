@@ -1,0 +1,53 @@
+:root {
+  --bg: #0b0f2b;
+  --card: #151a45;
+  --card-hover: #1d2358;
+  --text: #f4f5ff;
+  --muted: #a3a9d6;
+  --accent: #ffd98a;
+  --coral: #ff7a59;
+  --teal: #5eead4;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 0%, #1b2160 0%, var(--bg) 55%);
+  color: var(--text);
+  min-height: 100vh;
+}
+.app { max-width: 640px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+h1 { margin: 0; font-size: 2rem; }
+.tagline { color: var(--muted); margin: 0.25rem 0 1.5rem; }
+#status { color: var(--muted); min-height: 1.5em; }
+.banner {
+  background: #3b2a12; border: 1px solid var(--accent); color: var(--accent);
+  padding: 0.75rem 1rem; border-radius: 10px; margin: 0 0 1rem;
+}
+#song-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.5rem; }
+.song {
+  display: flex; align-items: center; gap: 0.9rem;
+  background: var(--card); padding: 0.7rem 0.9rem; border-radius: 12px;
+}
+.song:hover { background: var(--card-hover); }
+.cover {
+  width: 44px; height: 44px; border-radius: 8px; flex: none;
+  display: grid; place-items: center; font-weight: 700; color: var(--bg);
+  background: linear-gradient(135deg, var(--accent), var(--coral));
+}
+.song-text { display: grid; }
+.song-title { font-weight: 600; }
+.song-meta { color: var(--muted); font-size: 0.9rem; }
+details.add { background: var(--card); border-radius: 12px; padding: 0.8rem 1rem; }
+details.add summary { cursor: pointer; font-weight: 600; }
+form { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+input {
+  flex: 1 1 140px; padding: 0.55rem 0.7rem; border-radius: 8px;
+  border: 1px solid #343a7a; background: #0e1238; color: var(--text); font: inherit;
+}
+button {
+  padding: 0.55rem 1rem; border: 0; border-radius: 8px; cursor: pointer;
+  background: var(--accent); color: var(--bg); font: inherit; font-weight: 700;
+}
+button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+form.search { margin: 0 0 1rem; }
