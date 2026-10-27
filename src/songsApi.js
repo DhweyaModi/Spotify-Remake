@@ -8,12 +8,14 @@ export async function fetchSongs() {
   return data;
 }
 
-// SQL:  SELECT * FROM songs WHERE artist = 'Drake';
+// SQL:  SELECT * FROM songs WHERE artist ILIKE '%drake%';
+// .eq('artist', 'Drake') is case-sensitive: 'drake' finds nothing.
+// .ilike ignores case and the % signs mean "anything before/after".
 export async function fetchSongsByArtist(artist) {
   const { data, error } = await supabase
     .from('songs')
     .select('*')
-    .eq('artist', artist);
+    .ilike('artist', `%${artist}%`);
   if (error) throw error;
   return data;
 }
