@@ -1,24 +1,37 @@
 import './style.css';
-import { renderSongs, showBanner } from './render.js';
+import { renderSongs, setStatus, showBanner } from './render.js';
 import { isConfigured } from './supabaseClient.js';
+import { fetchSongs } from './songsApi.js';
 
-// PHASE 0: every song lives in this array, inside the browser's memory.
-// Add a song, refresh the page... and it's gone. Where did it go?
-let songs = [
-  { id: 1, title: 'One Dance', artist: 'Drake', album: 'Views' },
-  { id: 2, title: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours' },
-  { id: 3, title: 'Levitating', artist: 'Dua Lipa', album: 'Future Nostalgia' },
-  { id: 4, title: 'Hotline Bling', artist: 'Drake', album: 'Views' },
-  { id: 5, title: 'Cruel Summer', artist: 'Taylor Swift', album: 'Lover' },
-];
+// PHASE 3: songs now come from your database, not a hardcoded array.
+let songs = [];
 
 const addForm = document.querySelector('#add-form');
 
+async function loadSongs() {
+  if (!isConfigured) {
+    showBanner();
+    renderSongs([]);
+    return;
+  }
+  setStatus('Loading songs...');
+  try {
+    songs = await fetchSongs();
+    renderSongs(songs);
+  } catch (error) {
+    console.error(error);
+    setStatus(`Could not load songs: ${error.message}`);
+  }
+}
+
+// STILL LOCAL ONLY: this adds to the browser's memory, not the database.
+// Refresh and the songs from Supabase stay... but your new song vanishes.
+// YOUR TURN (option C): make this save to Supabase. See phase-5-insert.
 addForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const form = new FormData(addForm);
   songs.push({
-    id: songs.length + 1,
+    id: Date.now(),
     title: form.get('title').trim(),
     artist: form.get('artist').trim(),
     album: form.get('album').trim() || null,
@@ -27,8 +40,4 @@ addForm.addEventListener('submit', (event) => {
   renderSongs(songs);
 });
 
-renderSongs(songs);
-
-// PHASE 1: check the connection details are in place.
-console.log('Supabase keys found?', isConfigured);
-if (!isConfigured) showBanner();
+loadSongs();
