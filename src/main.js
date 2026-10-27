@@ -1,7 +1,7 @@
 import './style.css';
 import { renderSongs, setStatus, showBanner } from './render.js';
 import { isConfigured } from './supabaseClient.js';
-import { fetchSongs, fetchSongsByArtist } from './songsApi.js';
+import { fetchSongs, fetchSongsByArtist, addSong } from './songsApi.js';
 
 let songs = [];
 
@@ -26,7 +26,6 @@ async function loadSongs() {
   }
 }
 
-// PHASE 4: the filtering now happens in the DATABASE, not in JavaScript.
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const artist = searchInput.value.trim();
@@ -48,18 +47,25 @@ clearBtn.addEventListener('click', () => {
   loadSongs();
 });
 
-// STILL LOCAL ONLY (see phase-5-insert).
-addForm.addEventListener('submit', (event) => {
+// PHASE 5: new songs are saved to the database, so refresh and they're still here.
+addForm.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (!isConfigured) return showBanner();
+
   const form = new FormData(addForm);
-  songs.push({
-    id: Date.now(),
-    title: form.get('title').trim(),
-    artist: form.get('artist').trim(),
-    album: form.get('album').trim() || null,
-  });
-  addForm.reset();
-  renderSongs(songs);
+  try {
+    await addSong({
+      title: form.get('title').trim(),
+      artist: form.get('artist').trim(),
+      album: form.get('album').trim() || null,
+    });
+    addForm.reset();
+    searchForm.reset();
+    await loadSongs();
+  } catch (error) {
+    console.error(error);
+    setStatus(`Could not add song: ${error.message}`);
+  }
 });
 
 loadSongs();
