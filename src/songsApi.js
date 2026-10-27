@@ -7,3 +7,13 @@ export async function fetchSongs() {
   if (error) throw error;
   return data;
 }
+
+// SQL:  SELECT * FROM songs WHERE artist = 'Drake';
+export async function fetchSongsByArtist(artist) {
+  const { data, error } = await supabase
+    .from('songs')
+    .select('*')
+    .eq('artist', artist);
+  if (error) throw error;
+  return data;
+}
