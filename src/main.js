@@ -1,5 +1,6 @@
 import './style.css';
-import { renderSongs } from './render.js';
+import { renderSongs, showBanner } from './render.js';
+import { isConfigured } from './supabaseClient.js';
 
 // PHASE 0: every song lives in this array, inside the browser's memory.
 // Add a song, refresh the page... and it's gone. Where did it go?
@@ -27,3 +28,7 @@ addForm.addEventListener('submit', (event) => {
 });
 
 renderSongs(songs);
+
+// PHASE 1: check the connection details are in place.
+console.log('Supabase keys found?', isConfigured);
+if (!isConfigured) showBanner();

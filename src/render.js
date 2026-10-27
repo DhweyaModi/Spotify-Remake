@@ -40,3 +40,13 @@ export function renderSongs(songs) {
     listEl.append(li);
   }
 }
+
+// Shows a friendly warning when .env isn't filled in yet.
+export function showBanner() {
+  if (document.querySelector('.banner')) return;
+  const banner = document.createElement('p');
+  banner.className = 'banner';
+  banner.textContent =
+    '⚠️ Supabase keys missing. Copy .env.example to .env, paste your Project URL and public key, then restart npm run start.';
+  document.querySelector('header').after(banner);
+}
