@@ -1,12 +1,14 @@
 import './style.css';
 import { renderSongs, setStatus, showBanner } from './render.js';
 import { isConfigured } from './supabaseClient.js';
-import { fetchSongs } from './songsApi.js';
+import { fetchSongs, fetchSongsByArtist } from './songsApi.js';
 
-// PHASE 3: songs now come from your database, not a hardcoded array.
 let songs = [];
 
 const addForm = document.querySelector('#add-form');
+const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-input');
+const clearBtn = document.querySelector('#clear-btn');
 
 async function loadSongs() {
   if (!isConfigured) {
@@ -24,9 +26,29 @@ async function loadSongs() {
   }
 }
 
-// STILL LOCAL ONLY: this adds to the browser's memory, not the database.
-// Refresh and the songs from Supabase stay... but your new song vanishes.
-// YOUR TURN (option C): make this save to Supabase. See phase-5-insert.
+// PHASE 4: the filtering now happens in the DATABASE, not in JavaScript.
+searchForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const artist = searchInput.value.trim();
+  if (!artist) return loadSongs();
+  if (!isConfigured) return showBanner();
+
+  setStatus(`Searching for ${artist}...`);
+  try {
+    songs = await fetchSongsByArtist(artist);
+    renderSongs(songs);
+  } catch (error) {
+    console.error(error);
+    setStatus(`Search failed: ${error.message}`);
+  }
+});
+
+clearBtn.addEventListener('click', () => {
+  searchForm.reset();
+  loadSongs();
+});
+
+// STILL LOCAL ONLY (see phase-5-insert).
 addForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const form = new FormData(addForm);
