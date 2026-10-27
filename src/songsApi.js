@@ -19,3 +19,14 @@ export async function fetchSongsByArtist(artist) {
   if (error) throw error;
   return data;
 }
+
+// SQL:  INSERT INTO songs (title, artist, album) VALUES (...);
+export async function addSong({ title, artist, album }) {
+  const { data, error } = await supabase
+    .from('songs')
+    .insert({ title, artist, album })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
