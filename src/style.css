@@ -1,53 +1,66 @@
 :root {
-  --bg: #0b0f2b;
-  --card: #151a45;
-  --card-hover: #1d2358;
-  --text: #f4f5ff;
-  --muted: #a3a9d6;
-  --accent: #ffd98a;
-  --coral: #ff7a59;
-  --teal: #5eead4;
+  --bg: #121212;
+  --card: #181818;
+  --card-hover: #2a2a2a;
+  --text: #ffffff;
+  --muted: #b3b3b3;
+  --accent: #1ed760;
+  --accent-hover: #3be477;
+  --line: #727272;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at 20% 0%, #1b2160 0%, var(--bg) 55%);
+  font-family: "Circular Std", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  background: linear-gradient(180deg, #3b3b3b 0%, var(--bg) 340px);
+  background-repeat: no-repeat;
+  background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
 }
-.app { max-width: 640px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
-h1 { margin: 0; font-size: 2rem; }
-.tagline { color: var(--muted); margin: 0.25rem 0 1.5rem; }
-#status { color: var(--muted); min-height: 1.5em; }
+.app { max-width: 640px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.brand { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.75rem; }
+.logo { width: 32px; height: 32px; }
+.wordmark { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.04em; }
+.eyebrow { margin: 0; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+h1 { margin: 0.1rem 0 0; font-size: 2.75rem; font-weight: 900; letter-spacing: -0.04em; }
+.tagline { color: var(--muted); margin: 0.4rem 0 1.5rem; }
+#status { color: var(--muted); min-height: 1.5em; font-size: 0.9rem; }
 .banner {
-  background: #3b2a12; border: 1px solid var(--accent); color: var(--accent);
-  padding: 0.75rem 1rem; border-radius: 10px; margin: 0 0 1rem;
+  background: #2a2208; border: 1px solid #f5c542; color: #f5c542;
+  padding: 0.75rem 1rem; border-radius: 8px; margin: 0 0 1rem;
 }
-#song-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.5rem; }
+#song-list { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.25rem; }
 .song {
   display: flex; align-items: center; gap: 0.9rem;
-  background: var(--card); padding: 0.7rem 0.9rem; border-radius: 12px;
+  background: transparent; padding: 0.5rem 0.75rem; border-radius: 6px;
 }
 .song:hover { background: var(--card-hover); }
 .cover {
-  width: 44px; height: 44px; border-radius: 8px; flex: none;
-  display: grid; place-items: center; font-weight: 700; color: var(--bg);
-  background: linear-gradient(135deg, var(--accent), var(--coral));
+  width: 48px; height: 48px; border-radius: 4px; flex: none;
+  display: grid; place-items: center; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #450af5, #8e8ee5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 .song-text { display: grid; }
-.song-title { font-weight: 600; }
-.song-meta { color: var(--muted); font-size: 0.9rem; }
-details.add { background: var(--card); border-radius: 12px; padding: 0.8rem 1rem; }
-details.add summary { cursor: pointer; font-weight: 600; }
+.song-title { font-weight: 500; }
+.song-meta { color: var(--muted); font-size: 0.875rem; }
+details.add { background: var(--card); border-radius: 8px; padding: 0.9rem 1.1rem; }
+details.add summary { cursor: pointer; font-weight: 700; }
 form { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
 input {
-  flex: 1 1 140px; padding: 0.55rem 0.7rem; border-radius: 8px;
-  border: 1px solid #343a7a; background: #0e1238; color: var(--text); font: inherit;
+  flex: 1 1 140px; padding: 0.7rem 0.9rem; border-radius: 500px;
+  border: 1px solid transparent; background: #2a2a2a; color: var(--text); font: inherit;
 }
+input::placeholder { color: var(--muted); }
+input:hover { background: #333; }
+input:focus { outline: 2px solid var(--text); background: #333; }
 button {
-  padding: 0.55rem 1rem; border: 0; border-radius: 8px; cursor: pointer;
-  background: var(--accent); color: var(--bg); font: inherit; font-weight: 700;
+  padding: 0.7rem 1.6rem; border: 0; border-radius: 500px; cursor: pointer;
+  background: var(--accent); color: #000; font: inherit; font-weight: 700;
+  transition: transform 0.1s, background 0.1s;
 }
-button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+button:hover { background: var(--accent-hover); transform: scale(1.04); }
+button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+button.secondary:hover { background: transparent; border-color: var(--text); }
 form.search { margin: 0 0 1rem; }
