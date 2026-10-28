@@ -8,14 +8,13 @@ export async function fetchSongs() {
   return data;
 }
 
-// SQL:  SELECT * FROM songs WHERE artist ILIKE '%drake%';
-// .eq('artist', 'Drake') is case-sensitive: 'drake' finds nothing.
-// .ilike ignores case and the % signs mean "anything before/after".
+// TODO: filter songs by artist.
+// SQL:  SELECT * FROM songs WHERE artist = 'Drake';
+// Hints:
+//   1. Start like fetchSongs: supabase.from('songs').select('*')
+//   2. Add .eq('artist', artist) to keep only matching rows
+//   3. await it, throw the error if there is one, return data
+// Stretch: 'drake' finds nothing with .eq. Try .ilike('artist', `%${artist}%`).
 export async function fetchSongsByArtist(artist) {
-  const { data, error } = await supabase
-    .from('songs')
-    .select('*')
-    .ilike('artist', `%${artist}%`);
-  if (error) throw error;
-  return data;
+  return [];
 }

@@ -34,7 +34,8 @@ Every branch builds on the one before it. If you get stuck, jump to the next che
 | `phase-1-connect` | `.env`, Supabase client, missing-keys warning | Keys: the front door |
 | `phase-2-tables` | SQL for the `songs` table, seed rows, read policy | Boxes → Table · Insert rows · Ask in SQL |
 | `phase-3-fetch` | `fetchSongs()`: the list comes from your database | Show it in the app |
-| `phase-4-filter` | Search by artist with `.eq`, then `.ilike` | Translate to JavaScript · Your turn (A) |
+| `phase-4-filter` | Exercise: search box is wired up, `fetchSongsByArtist` is empty for you to write | Translate to JavaScript · Your turn (A) |
+| `phase-4-filter-solution` | Finished filter: `.eq`, then `.ilike` | Checkpoint for (A) |
 | `phase-5-insert` | Add songs that are really saved with `.insert` | Your turn (C) |
 | `solution` | Same as `phase-5-insert` | |
 
@@ -49,7 +50,7 @@ To compare what a phase changed: `git diff main..phase-1-connect` or `git log --
 
 ## Your turn
 
-- **A. Filter:** search by a different artist with `.eq('artist', ...)` (see `phase-4-filter`).
+- **A. Filter:** search by a different artist with `.eq('artist', ...)` (start on `phase-4-filter`; stuck? peek at `phase-4-filter-solution`).
 - **B. New column:** add a `year` column in Table Editor, then show it on each song.
 - **C. Save for real:** make the "Add a song" form write to the database (see `phase-5-insert`).
 - **Stretch:** sort with `.order('title')`. Then sketch the tables for *your* favorite app.
