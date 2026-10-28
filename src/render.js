@@ -33,6 +33,8 @@ export function renderSongs(songs) {
 
     const meta = document.createElement('span');
     meta.className = 'song-meta';
+    // TODO (Option B): after adding the `year` column in Supabase, add
+    // ` · ${song.year ?? ''}` inside the template string below.
     meta.textContent = `${song.artist} · ${song.album ?? 'Single'}`;
 
     text.append(title, meta);
